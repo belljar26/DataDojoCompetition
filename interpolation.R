@@ -11,7 +11,7 @@ boxplot(new_titanic$Fare)
 #filter out outliers
 boxplot.stats(new_titanic$Fare)
 upper.whisker <- boxplot.stats(new_titanic$Fare)$stats[5]
-outlier.filter <- new_titanic$Fare > upper.whisker
+outlier.filter <- new_titanic$Fare < upper.whisker
 no.out.titanic <-new_titanic[outlier.filter,]
 
 Fare_int <- lm(Fare ~ Sex + Parch + SibSp + Age + Pclass + Embarked,
@@ -32,7 +32,7 @@ new_titanic[is.na(new_titanic$Age), "Age"]
 boxplot(new_titanic$Age)
 boxplot.stats(new_titanic$Age)
 age.u.whisker <- boxplot.stats(new_titanic$Age)$stats[5]
-age.outlier.filter <- new_titanic$Age > age.u.whisker
+age.outlier.filter <- new_titanic$Age < age.u.whisker
 remove.age.outlier <- new_titanic[age.outlier.filter,]
 Age.int <- lm(Age~ Sex + Pclass + SibSp + Parch, 
               data= remove.age.outlier)
